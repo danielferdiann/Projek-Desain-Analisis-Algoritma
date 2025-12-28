@@ -1,0 +1,31 @@
+.reset-btn {
+    -fx-background-color:  #3694CC;
+    -fx-background-radius: 5px 5px 0px 0px;
+    -fx-text-fill: #e6ecf0;
+}
+
+.reset-btn:hover {
+    -fx-background-color: #7FC0E7;
+    -fx-text-fill: #3694cc;
+}
+
+.solve-btn {
+    -fx-background-color:  #3694CC;
+    -fx-background-radius: 0px 0px 5px 5px;
+    -fx-text-fill: #e6ecf0;
+}
+
+.solve-btn:hover {
+    -fx-background-color: #7FC0E7;
+    -fx-text-fill: #3694cc;
+}
+
+.num-btn {
+    -fx-background-color: #7FC0E7;
+    -fx-text-fill: #3694cc;
+}
+
+.num-btn:hover {
+    -fx-background-color: #3694CC;
+    -fx-text-fill: #e6ecf0;
+}

@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:controller="pro.algo.sudoku.SudokuSolverController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #3694CC;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="170.0">
+               <children>
+                  <Label prefHeight="100.0" prefWidth="170.0" text="Sudoku" textFill="#D6D9DC">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="170.0" style="-fx-alignment: center-right;" text="Solver" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Region prefHeight="87.0" prefWidth="261.0" />
+            <VBox prefHeight="80.0" prefWidth="150.0" spacing="5.0" style="-fx-background-color: #E6ECF0; -fx-background-radius: 7px;">
+               <children>
+                  <Button layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#resetSudoku" prefHeight="40.0" prefWidth="140.0" styleClass="reset-btn" text="Reset" textFill="#e6ecf0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="solveButton" mnemonicParsing="false" onAction="#getAndSolveSudoku" prefHeight="40.0" prefWidth="140.0" styleClass="solve-btn" text="Solve" textFill="#e6ecf0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding></VBox>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <GridPane fx:id="sudokuBoard" style="-fx-background-color: #E6ECF0; -fx-border-color: #3694CC; -fx-border-width: 2px; -fx-alignment: center;" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane hgap="2.0" style="-fx-alignment: center; -fx-border-color: #3694CC; -fx-border-width: 2px;" vgap="2.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+            <GridPane hgap="2.0" layoutX="12.0" layoutY="12.0" style="-fx-alignment: center; -fx-border-color: #3694CC; -fx-border-width: 2px;" vgap="2.0" GridPane.columnIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+            <GridPane hgap="2.0" layoutX="211.0" layoutY="12.0" style="-fx-alignment: center; -fx-border-color: #3694CC; -fx-border-width: 2px;" vgap="2.0" GridPane.columnIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+            <GridPane hgap="2.0" layoutX="411.0" layoutY="12.0" style="-fx-alignment: center; -fx-border-color: #3694CC; -fx-border-width: 2px;" vgap="2.0" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+            <GridPane hgap="2.0" layoutX="12.0" layoutY="209.0" style="-fx-alignment: center; -fx-border-color: #3694CC; -fx-border-width: 2px;" vgap="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+            <GridPane hgap="2.0" layoutX="211.0" layoutY="209.0" style="-fx-alignment: center; -fx-border-color: #3694CC; -fx-border-width: 2px;" vgap="2.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+            <GridPane hgap="2.0" layoutX="12.0" layoutY="12.0" style="-fx-alignment: center; -fx-border-color: #3694CC; -fx-border-width: 2px;" vgap="2.0" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+            <GridPane hgap="2.0" layoutX="12.0" layoutY="407.0" style="-fx-alignment: center; -fx-border-color: #3694CC; -fx-border-width: 2px;" vgap="2.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+            <GridPane hgap="2.0" layoutX="211.0" layoutY="407.0" style="-fx-alignment: center; -fx-border-color: #3694CC; -fx-border-width: 2px;" vgap="2.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="11.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="143.0" layoutY="77.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="77.0" layoutY="144.0" mnemonicParsing="false" onAction="#toggleNumber" prefHeight="65.0" prefWidth="65.0" styleClass="num-btn" text="0" textFill="#3694cc" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>
